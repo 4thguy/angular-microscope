@@ -1,0 +1,54 @@
+<form *ngIf="appState === AppState.Players">
+  <ul>
+    <li *ngFor="let player of table.players">
+      <span class="player-name">{{ player.name }}</span>
+      <span class="player-delete" (click)="onDeletePlayer(player)">X</span>
+    </li>
+  </ul>
+  <input [(ngModel)]="data.nextName" name="nextName" placeholder="Player {{ players.length + 1 }}">
+  <button (click)="onSubmitPlayer()">Add Player</button>
+  <button (click)="onSubmitPlayers()">Add Players</button>
+</form>
+<form (ngSubmit)="onSubmitBigPicture()" *ngIf="appState === AppState.BigPicture">
+  <input [(ngModel)]="data.bigPicture" name="bigPicture" placeholder="Big Picture">
+  <input type="submit">
+</form>
+<form (ngSubmit)="onSubmitBookends()" *ngIf="appState === AppState.BookendHistory">
+  <div class="bookend-start" [ngClass]="{ 'period-light': data.bookends.start.light }">
+    <input [(ngModel)]="data.bookends.start.title" name="title" placeholder="Start">
+    <input [(ngModel)]="data.bookends.start.light" name="light" type="checkbox">
+  </div>
+  <div class="bookend-end" [ngClass]="{ 'period-light': data.bookends.end.light }">
+    <input [(ngModel)]="data.bookends.end.title" name="title" placeholder="End">
+    <input [(ngModel)]="data.bookends.end.light" name="light" type="checkbox">
+  </div>
+  <input type="submit">
+</form>
+<form *ngIf="appState === AppState.Palette">
+  Current Player: {{ data.palette.currentPlayer.name }}
+  <ul>
+    <li>
+      <span class="palette-title">Yes</span>
+      <ul>
+        <li *ngFor="let yes of table.palette.yes">
+          <span class="palette-title">{{ yes }}</span>
+          <span class="palette-delete">X</span>
+        </li>
+      </ul>
+      <input [(ngModel)]="data.palette.yes" name="yes">
+      <button (click)="onSubmitPalette('yes')">Add Yes</button>
+      <li>
+        <span class="palette-title">No</span>
+        <ul>
+          <li *ngFor="let no of table.palette.no">
+            <span class="palette-title">{{ no }}</span>
+            <span class="palette-delete">X</span>
+          </li>
+        </ul>
+        <input [(ngModel)]="data.palette.no" name="no">
+        <button (click)="onSubmitPalette('no')">Add No</button>
+      </li>
+    </ul>
+    <button (click)="onSubmitPaletteSkip()">Skip Me</button>
+    <button (click)="onSubmitPaletteEnd()">End</button>
+  </form>

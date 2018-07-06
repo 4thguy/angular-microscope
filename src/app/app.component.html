@@ -1,3 +1,31 @@
+<app-setup></app-setup>
+
+<ul>
+<li *ngFor="let player of table.players">
+  <span class="player-name">{{ player.name }}</span>
+</li>
+</ul>
+
+<div class="game-title">{{ table.title }}</div>
+
+<ul>
+<li>
+  <span class="palette-title">Yes</span>
+  <ul>
+    <li *ngFor="let yes of table.palette.yes">
+      <span>{{ yes }}</span>
+    </li>
+  </ul>
+  <li>
+    <span class="palette-title">No</span>
+    <ul>
+      <li *ngFor="let no of table.palette.no">
+        <span>{{ no }}</span>
+      </li>
+    </ul>
+  </li>
+</ul>
+
 <ul>
   <li *ngFor="let period of table.periods">
     <span class="period-title">{{ period.title }}</span>
@@ -21,21 +49,3 @@
     <span class="legacy-lens">{{ legacy.lens.name }}</span>
   </li>
 </ul>
-
-<ul>
-  <li>
-    <span class="palette-title">Yes</span>
-    <ul>
-      <li *ngFor="let yes of table.palette.yes">
-        <span>{{ yes }}</span>
-      </li>
-    </ul>
-    <li>
-      <span class="palette-title">No</span>
-      <ul>
-        <li *ngFor="let no of table.palette.no">
-          <span>{{ no }}</span>
-        </li>
-      </ul>
-    </li>
-  </ul>

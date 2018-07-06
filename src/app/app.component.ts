@@ -6,6 +6,8 @@ import { CardPeriod } from './cardPeriod';
 import { CardEvent } from './cardEvent';
 import { CardScene } from './cardScene';
 
+import { AppState } from './appState';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,6 +15,8 @@ import { CardScene } from './cardScene';
 })
 export class AppComponent {
   title = 'app';
+
+  AppState = AppState;
 
   table: CardTable;
 

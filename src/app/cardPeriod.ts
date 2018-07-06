@@ -3,9 +3,10 @@ import { CardEvent } from './cardEvent';
 export class CardPeriod {
   id: number;
   title: string;
+  light: boolean;
   events: CardEvent[];
 
-  constructor(title: string) {
+  constructor(title: string, light: boolean) {
     this.title = title;
     this.events = [];
   }
