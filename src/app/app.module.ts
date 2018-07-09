@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { SetupComponent } from './setup/setup.component';
+import { GameComponent } from './game/game.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SetupComponent
+    SetupComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,

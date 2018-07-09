@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+
+import { SetupState } from './setup.state';
 import { SetupData } from './setup.data';
+
 import { Player } from '../player';
+
 import { CardTable } from '../cardTable';
 import { CardLegacy } from '../cardLegacy';
 import { CardPeriod } from '../cardPeriod';
 import { CardEvent } from '../cardEvent';
 import { CardScene } from '../cardScene';
-
-import { SetupState } from './setup.state';
 
 @Component({
   selector: 'app-setup',
@@ -28,6 +30,7 @@ export class SetupComponent implements OnInit {
     this.data = new SetupData();
     this.table = CardTable.getSingleton();
     this.setupState = SetupState.Players;
+    this.setupState = SetupState.Finished;
   }
 
   onSubmitPlayer() {
@@ -55,8 +58,6 @@ export class SetupComponent implements OnInit {
     var endPeriod = new CardPeriod(this.data.bookends.end.title, this.data.bookends.end.light);
     this.table.setBookends(startPeriod, endPeriod);
 
-
-    console.log(this.table.players);
     this.data.palette.currentPlayer = this.table.players[0];
 
     this.setupState = SetupState.Palette;

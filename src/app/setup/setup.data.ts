@@ -22,6 +22,4 @@ export class SetupData {
     this.palette.no = '';
     this.palette.lastRound = false;
   };
-  }
 }
-

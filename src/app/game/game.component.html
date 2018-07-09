@@ -1,0 +1,64 @@
+<div class="bigpicture-title" *ngIf="table.bigPicture">{{ table.bigPicture }}</div>
+<div class="state-title">{{ currentStateString() }}</div>
+<div class="player-name" *ngIf="currentLens">{{ currentLens.name }}</div>
+
+<ul>
+  <li *ngIf="table.palette.yes.length > 0">
+    <span class="palette-title">Yes</span>
+    <ul>
+      <li *ngFor="let yes of table.palette.yes">
+        <span>{{ yes }}</span>
+      </li>
+    </ul>
+  </li>
+  <li *ngIf="table.palette.no.length > 0">
+    <span class="palette-title">No</span>
+    <ul>
+      <li *ngFor="let no of table.palette.no">
+        <span>{{ no }}</span>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<ul>
+  <li *ngFor="let period of table.periods">
+    <span class="period-title">{{ period.title }}</span>
+    <button
+    class="button-add period-add"
+    *ngIf="gameState === GameState.AddPeriodEventScene"
+    (click)="addCard('period', period)"
+    >Add Period</button>
+    <ul>
+      <li *ngFor="let event of period.events">
+        <span class="event-title">{{ event.title }}</span>
+        <button
+        class="button-add event-add"
+        *ngIf="gameState === GameState.AddPeriodEventScene"
+        (click)="addCard('event', period, event)"
+        >Add Event</button>
+        <ul>
+          <li *ngFor="let scene of event.scenes">
+            <span class="scene-title">{{ scene.title }}</span>
+            <span class="scene-answer">{{ scene.answer }}</span>
+            <button
+            class="button-add scene-add"
+            *ngIf="gameState === GameState.AddPeriodEventScene"
+            (click)="addCard('scene', period, event, scene)"
+            >Add Scene</button>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<form (ngSubmit)="onSubmitFocus()" *ngIf="gameState === GameState.DeclareFocus">
+  <input [(ngModel)]="textbox" name="textbox" placeholder="Focus">
+  <input type="submit">
+</form>
+<form (ngSubmit)="onSubmitPeriodEventScene()" *ngIf="gameState === GameState.SubmitPeriodEventScene">
+  <input [(ngModel)]="textbox" name="textbox" placeholder="Period">
+</form>
+
+<button (click)="triggerNext()">Next Step</button>

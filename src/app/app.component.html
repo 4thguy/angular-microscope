@@ -1,52 +1,66 @@
-<app-setup></app-setup>
+<app-setup>
+  
+</app-setup>
 
+<app-game>
+  
+</app-game>
+<!--
 <ul>
-<li *ngFor="let player of table.players">
-  <span class="player-name">{{ player.name }}</span>
-</li>
+  <li *ngFor="let player of table.players">
+    <span class="player-name">{{ player.name }}</span>
+  </li>
 </ul>
 
 <div class="game-title">{{ table.title }}</div>
 
 <ul>
-<li *ngIf="table.palette.yes.length > 0">
-  <span class="palette-title">Yes</span>
-  <ul>
-    <li *ngFor="let yes of table.palette.yes">
-      <span>{{ yes }}</span>
-    </li>
-  </ul>
-</li>
-<li *ngIf="table.palette.no.length > 0">
-  <span class="palette-title">No</span>
-  <ul>
-    <li *ngFor="let no of table.palette.no">
-      <span>{{ no }}</span>
-    </li>
-  </ul>
-</li>
+  <li *ngFor="let focus of table.focai">
+    <span class="focus-name">{{ focus.title }}</span>
+    <span class="focus-lens">{{ focus.lens.name }}</span>
+  </li>
 </ul>
 
 <ul>
-<li *ngFor="let period of table.periods">
-  <span class="period-title">{{ period.title }}</span>
-  <ul>
-    <li *ngFor="let event of period.events">
-      <span class="event-title">{{ event.title }}</span>
-      <ul>
-        <li *ngFor="let scene of event.scenes">
-          <span class="scene-title">{{ scene.title }}</span>
-          <span class="scene-answer">{{ scene.answer }}</span>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</li>
+  <li *ngIf="table.palette.yes.length > 0">
+    <span class="palette-title">Yes</span>
+    <ul>
+      <li *ngFor="let yes of table.palette.yes">
+        <span>{{ yes }}</span>
+      </li>
+    </ul>
+  </li>
+  <li *ngIf="table.palette.no.length > 0">
+    <span class="palette-title">No</span>
+    <ul>
+      <li *ngFor="let no of table.palette.no">
+        <span>{{ no }}</span>
+      </li>
+    </ul>
+  </li>
 </ul>
 
 <ul>
-<li *ngFor="let legacy of table.legacies">
-  <span class="legacy-name">{{ legacy.title }}</span>
-  <span class="legacy-lens">{{ legacy.lens.name }}</span>
-</li>
+  <li *ngFor="let period of table.periods">
+    <span class="period-title">{{ period.title }}</span>
+    <ul>
+      <li *ngFor="let event of period.events">
+        <span class="event-title">{{ event.title }}</span>
+        <ul>
+          <li *ngFor="let scene of event.scenes">
+            <span class="scene-title">{{ scene.title }}</span>
+            <span class="scene-answer">{{ scene.answer }}</span>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
 </ul>
+
+<ul>
+  <li *ngFor="let legacy of table.legacies">
+    <span class="legacy-name">{{ legacy.title }}</span>
+    <span class="legacy-lens">{{ legacy.lens.name }}</span>
+  </li>
+</ul>
+-->
