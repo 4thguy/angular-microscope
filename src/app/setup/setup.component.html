@@ -1,4 +1,4 @@
-<form *ngIf="appState === AppState.Players">
+<form *ngIf="setupState === SetupState.Players">
   <ul>
     <li *ngFor="let player of table.players">
       <span class="player-name">{{ player.name }}</span>
@@ -9,11 +9,11 @@
   <button (click)="onSubmitPlayer()">Add Player</button>
   <button (click)="onSubmitPlayers()">Add Players</button>
 </form>
-<form (ngSubmit)="onSubmitBigPicture()" *ngIf="appState === AppState.BigPicture">
+<form (ngSubmit)="onSubmitBigPicture()" *ngIf="setupState === SetupState.BigPicture">
   <input [(ngModel)]="data.bigPicture" name="bigPicture" placeholder="Big Picture">
   <input type="submit">
 </form>
-<form (ngSubmit)="onSubmitBookends()" *ngIf="appState === AppState.BookendHistory">
+<form (ngSubmit)="onSubmitBookends()" *ngIf="setupState === SetupState.BookendHistory">
   <div class="bookend-start" [ngClass]="{ 'period-light': data.bookends.start.light }">
     <input [(ngModel)]="data.bookends.start.title" name="title" placeholder="Start">
     <input [(ngModel)]="data.bookends.start.light" name="light" type="checkbox">
@@ -24,7 +24,7 @@
   </div>
   <input type="submit">
 </form>
-<form *ngIf="appState === AppState.Palette">
+<form *ngIf="setupState === SetupState.Palette">
   Current Player: {{ data.palette.currentPlayer.name }}
   <ul>
     <li>

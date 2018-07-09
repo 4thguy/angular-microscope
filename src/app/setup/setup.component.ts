@@ -7,7 +7,7 @@ import { CardPeriod } from '../cardPeriod';
 import { CardEvent } from '../cardEvent';
 import { CardScene } from '../cardScene';
 
-import { AppState } from '../appState';
+import { SetupState } from './setup.state';
 
 @Component({
   selector: 'app-setup',
@@ -16,8 +16,8 @@ import { AppState } from '../appState';
 })
 export class SetupComponent implements OnInit {
 
-  appState: AppState;
-  AppState = AppState;
+  setupState: SetupState;
+  SetupState = SetupState;
 
   data: SetupData;
   table: CardTable;
@@ -27,7 +27,7 @@ export class SetupComponent implements OnInit {
   ngOnInit() {
     this.data = new SetupData();
     this.table = CardTable.getSingleton();
-    this.appState = AppState.Players;
+    this.setupState = SetupState.Players;
   }
 
   onSubmitPlayer() {
@@ -40,14 +40,14 @@ export class SetupComponent implements OnInit {
   }
   onSubmitPlayers() {
     if (this.table.players.length>0) {
-      this.appState = AppState.BigPicture;
+      this.setupState = SetupState.BigPicture;
     }
   }
 
   onSubmitBigPicture() {
       this.table.title = this.data.bigPicture;
 
-      this.appState = AppState.BookendHistory
+      this.setupState = SetupState.BookendHistory
   }
 
   onSubmitBookends() {
@@ -59,7 +59,7 @@ export class SetupComponent implements OnInit {
     console.log(this.table.players);
     this.data.palette.currentPlayer = this.table.players[0];
 
-    this.appState = AppState.Palette;
+    this.setupState = SetupState.Palette;
   }
 
   onSubmitPalette(type: string) {
@@ -86,7 +86,7 @@ export class SetupComponent implements OnInit {
   onSubmitPaletteEnd() {
     var i = this.table.players.indexOf(this.data.palette.currentPlayer);
     if ((i === 0) || (i === this.table.players.length - 1)) {
-      this.appState = AppState.Rounds;
+      this.setupState = SetupState.Rounds;
     }
   }
 
@@ -94,7 +94,7 @@ export class SetupComponent implements OnInit {
     if (this.data.palette.lastRound) {
       var i = this.table.players.indexOf(this.data.palette.currentPlayer);
       if (i === 0) {
-        this.appState = AppState.Rounds;
+        this.setupState = SetupState.Rounds;
       }
     }
   }
