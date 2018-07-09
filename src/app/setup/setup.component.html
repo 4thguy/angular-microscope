@@ -5,7 +5,7 @@
       <span class="player-delete" (click)="onDeletePlayer(player)">X</span>
     </li>
   </ul>
-  <input [(ngModel)]="data.nextName" name="nextName" placeholder="Player {{ players.length + 1 }}">
+  <input [(ngModel)]="data.nextName" name="nextName" placeholder="Player {{ table.players.length + 1 }}">
   <button (click)="onSubmitPlayer()">Add Player</button>
   <button (click)="onSubmitPlayers()">Add Players</button>
 </form>

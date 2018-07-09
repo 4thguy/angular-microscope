@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SetupData } from './setup.data';
 import { Player } from '../player';
 import { CardTable } from '../cardTable';
 import { CardLegacy } from '../cardLegacy';
@@ -18,13 +19,13 @@ export class SetupComponent implements OnInit {
   appState: AppState;
   AppState = AppState;
 
-  data: object;
+  data: SetupData;
   table: CardTable;
 
   constructor() { }
 
   ngOnInit() {
-    this.data = {};
+    this.data = new SetupData();
     this.table = CardTable.getSingleton();
     this.appState = AppState.Players;
   }
@@ -44,13 +45,7 @@ export class SetupComponent implements OnInit {
   }
 
   onSubmitBigPicture() {
-      this.table.title = this.table.data.bigPicture;
-      this.data.bigPicture = '';
-
-      this.data.bookends = {
-        start: {},
-        end: {},
-      }
+      this.table.title = this.data.bigPicture;
 
       this.appState = AppState.BookendHistory
   }
@@ -60,7 +55,8 @@ export class SetupComponent implements OnInit {
     var endPeriod = new CardPeriod(this.data.bookends.end.title, this.data.bookends.end.light);
     this.table.setBookends(startPeriod, endPeriod);
 
-    this.data.palette = {};
+
+    console.log(this.table.players);
     this.data.palette.currentPlayer = this.table.players[0];
 
     this.appState = AppState.Palette;
