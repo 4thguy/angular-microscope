@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
+
+import { AppState } from './appState';
+
 import { Player } from './player';
+
 import { CardTable } from './cardTable';
 import { CardLegacy } from './cardLegacy';
 import { CardPeriod } from './cardPeriod';
 import { CardEvent } from './cardEvent';
 import { CardScene } from './cardScene';
-
-import { AppState } from './appState';
 
 @Component({
   selector: 'app-root',
@@ -87,6 +89,9 @@ export class AppComponent {
     // var p1 = new Player("Addie");
     // var p2 = new Player("Bors");
     // var p3 = new Player("Cat");
+    // this.table.addPlayer(p1);
+    // this.table.addPlayer(p2);
+    // this.table.addPlayer(p3);
 
     // var f1 = new CardLegacy("Storm of Swords", p1);
     // var f2 = new CardLegacy("The Last Flame", p2);
