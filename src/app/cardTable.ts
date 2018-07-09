@@ -3,6 +3,7 @@ import { CardPalette } from './cardPalette';
 import { CardPeriod } from './cardPeriod';
 import { Player } from './player';
 import { AppState } from './appState';
+import { CardFocus } from './cardFocus';
 
 export class CardTable {
   static singleton: CardTable;
@@ -16,6 +17,7 @@ export class CardTable {
   palette: CardPalette;
   periods: CardPeriod[];
   legacies: CardLegacy[];
+  focai: CardFocus[];
 
   constructor() {
     this.appState = AppState.BigPicture;
@@ -69,5 +71,9 @@ export class CardTable {
         return true;
     }
     return false;
+  }
+
+  addFocus(newFocus: CardFocus): boolean {
+    this.focai.push(newFocus);
   }
 }
