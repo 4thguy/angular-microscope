@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameState } from './game.state';
+import { GameStateTrigger } from './game.state.trigger';
 
 import { Player } from '../player';
 
@@ -101,75 +102,13 @@ export class GameComponent implements OnInit {
   }
 
   currentStateString(): string {
-    switch (this.gameState) {
-      case GameState.Start:
-        return "Start";
-        break;
-      case GameState.DeclareFocus:
-        return "Declare Focus";
-        break;
-      case GameState.AddPeriodEventScene:
-        return "Add Period / Event / Scene";
-        break;
-      case GameState.SubmitPeriodEventScene:
-        return "Submit Period / Event / Scene";
-        break;
-      case GameState.NextLens:
-        return "Choosing next Lens"
-        break;
-      case GameState.ChooseLegacy:
-        return "Select Legacy"
-        break;
-      case GameState.ExploreLegacy:
-        return "Explore Legacy"
-        break;
-      case GameState.Talk:
-        return "Talk";
-        break;
-      case GameState.Finish:
-        return "Finished";
-        break;
-
-      default:
-        // code...
-        break;
-    }
+    return GameStateTrigger.currentStateString(this.gameState);
   }
 
-  triggerNext() {
-    switch (this.gameState) {
-      case GameState.Start:
-        this.nextLens();
-        this.gameState = GameState.DeclareFocus;
-        break;
-      case GameState.DeclareFocus:
-        this.gameState = GameState.AddPeriodEventScene;
-        break;
-      case GameState.AddPeriodEventScene:
-        this.gameState = GameState.SubmitPeriodEventScene;
-        break;
-      case GameState.SubmitPeriodEventScene:
-        this.gameState = GameState.NextLens;
-        break;
-      case GameState.NextLens:
-        this.gameState = GameState.ChooseLegacy;
-        break;
-      case GameState.ChooseLegacy:
-        this.gameState = GameState.ExploreLegacy;
-        break;
-      case GameState.ExploreLegacy:
-        this.gameState = GameState.Talk;
-        break;
-      case GameState.Talk:
-        this.gameState = GameState.Finish;
-        break;
-      case GameState.Finish:
-        // code
-        break;
-
-      default:
-        // code...
-        break;
-    }
+  triggerRollback(): void {
+    this.gameState = GameStateTrigger.triggerRollback(this.gameState);
+  }
+  triggerNext(): void {
+    this.gameState = GameStateTrigger.triggerNext(this.gameState);
   }
 }

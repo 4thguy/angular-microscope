@@ -4,7 +4,6 @@ export enum GameState {
   DeclareFocus,
   AddPeriodEventScene,
   SubmitPeriodEventScene,
-  NextLens,
   ChooseLegacy,
   ExploreLegacy,
   SubmitLegacy,
