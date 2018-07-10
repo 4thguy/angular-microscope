@@ -22,7 +22,7 @@
 </ul>
 
 <ul>
-  <li *ngFor="let period of table.periods">
+  <li *ngFor="let period of table.periods" class="period" [ngClass]="{ 'period-light': period.light, 'period-dark': !period.light }">
     <span class="period-title">{{ period.title }}</span>
     <button
     class="button-add period-add"
@@ -30,7 +30,7 @@
     (click)="addCard('period', period)"
     >Add Period</button>
     <ul>
-      <li *ngFor="let event of period.events">
+      <li *ngFor="let event of period.events" class="event" [ngClass]="{ 'event-light': event.light, 'event-dark': !event.light }">
         <span class="event-title">{{ event.title }}</span>
         <button
         class="button-add event-add"
@@ -38,7 +38,7 @@
         (click)="addCard('event', period, event)"
         >Add Event</button>
         <ul>
-          <li *ngFor="let scene of event.scenes">
+          <li *ngFor="let scene of event.scenes" class="scene" [ngClass]="{ 'scene-light': scene.light, 'scene-dark': !scene.light }">
             <span class="scene-title">{{ scene.title }}</span>
             <span class="scene-answer">{{ scene.answer }}</span>
             <button

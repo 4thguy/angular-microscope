@@ -1,0 +1,14 @@
+.period.period-light .period-title:after,
+.event.event-light .event-title:after,
+.scene.scene-light .scene-answer:after {
+  content: " (light)";
+}
+.period.period-dark .period-title:after,
+.event.event-dark .event-title:after,
+.scene.scene-dark .scene-answer:after {
+  content: " (dark)";
+}
+
+.period:last-child > .period-add {
+  display: none;
+}
