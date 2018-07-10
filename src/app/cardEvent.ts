@@ -3,10 +3,12 @@ import { CardScene } from './cardScene';
 export class CardEvent {
   id: number;
   title: string;
+  light: boolean;
   scenes: CardScene[];
 
-  constructor(title: string) {
+  constructor(title: string, light: boolean) {
     this.title = title;
+    this.light = light;
     this.scenes = [];
   }
 

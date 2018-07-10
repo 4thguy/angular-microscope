@@ -8,6 +8,7 @@ export class CardPeriod {
 
   constructor(title: string, light: boolean) {
     this.title = title;
+    this.light = light;
     this.events = [];
   }
 

@@ -1,11 +1,11 @@
-import { Player } from './player';
-
 export class CardFocus {
-  title: string;
-  lens: Player;
+  focai: string[];
 
-  constructor(title: string, player: Player) {
-    this.title = title;
-    this.lens = player;
+  constructor() {
+    this.focai = [];
+  }
+
+  addToFocus(item: string) {
+    this.focai.push(item);
   }
 }

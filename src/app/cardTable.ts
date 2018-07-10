@@ -17,7 +17,7 @@ export class CardTable {
   palette: CardPalette;
   periods: CardPeriod[];
   legacies: CardLegacy[];
-  focai: CardFocus[];
+  focai: CardFocus;
 
   constructor() {
     this.appState = AppState.BigPicture;
@@ -28,6 +28,7 @@ export class CardTable {
     this.palette = new CardPalette();
     this.periods = [];
     this.legacies = [];
+    this.focai = new CardFocus();
   }
 
   static getSingleton(): CardTable {
@@ -48,13 +49,13 @@ export class CardTable {
     return true;
   }
 
-  setTitle(title: string) {
+  setTitle(title: string): void {
     this.title = title;
   }
 
-  setBookends(start: CardPeriod, end: CardPeriod) {
-    this.addPeriod(start, 0);
-    this.addPeriod(end, 1);
+  setBookends(start: CardPeriod, end: CardPeriod): void {
+    this.periods.splice(0, 0, start);
+    this.periods.splice(1, 0, end);
   }
 
   addLegacy(newFocus: CardLegacy): boolean {
@@ -63,17 +64,10 @@ export class CardTable {
   }
 
   addPeriod(newEvent: CardPeriod, insertAt: number): boolean {
-    if (
-      (insertAt > 0) && (insertAt < this.periods.length) ||
-      (this.periods.length < 2)
-    ) {
+    if ((insertAt > 0) && (insertAt < this.periods.length)) {
         this.periods.splice(insertAt, 0, newEvent);
         return true;
     }
     return false;
-  }
-
-  addFocus(newFocus: CardFocus): boolean {
-    this.focai.push(newFocus);
   }
 }
