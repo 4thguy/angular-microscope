@@ -1,6 +1,14 @@
 <div class="bigpicture-title" *ngIf="table.bigPicture">{{ table.bigPicture }}</div>
 <div class="state-title">{{ currentStateString() }}</div>
-<div class="player-name" *ngIf="currentLens">{{ currentLens.name }}</div>
+<div class="player-name" *ngIf="currentLens">Current Lens: {{ currentLens.name }}</div>
+<div class="player-name" *ngIf="( isInLegacyMode() && previousLens)">Legacy Player: {{ previousLens.name }}</div>
+<div class="player-name" *ngIf="(!isInLegacyMode() && currentPlayer)">Current Player: {{ currentPlayer.name }}</div>
+
+<ul>
+  <li *ngFor="let focus of table.focai.focai">
+    <span class="focus-title">{{ focus }}</span>
+  </li>
+</ul>
 
 <ul>
   <li *ngIf="table.palette.yes.length > 0">
@@ -26,24 +34,38 @@
     <span class="period-title">{{ period.title }}</span>
     <button
     class="button-add period-add"
-    *ngIf="gameState === GameState.AddPeriodEventScene"
+    *ngIf="isInAddPeriodEventSceneMode()"
     (click)="addCard('period', period)"
     >Add Period</button>
     <ul>
+      <li *ngIf="isInAddPeriodEventSceneMode()">
+        <button
+        class="button-add event-add"
+        *ngIf="isInAddPeriodEventSceneMode()"
+        (click)="addCard('event', period, event)"
+        >Add Event</button>
+      </li>
       <li *ngFor="let event of period.events" class="event" [ngClass]="{ 'event-light': event.light, 'event-dark': !event.light }">
         <span class="event-title">{{ event.title }}</span>
         <button
         class="button-add event-add"
-        *ngIf="gameState === GameState.AddPeriodEventScene"
+        *ngIf="isInAddPeriodEventSceneMode()"
         (click)="addCard('event', period, event)"
         >Add Event</button>
         <ul>
+          <li *ngIf="isInAddPeriodEventSceneMode()">
+            <button
+            class="button-add scene-add"
+            *ngIf="isInAddPeriodEventSceneMode()"
+            (click)="addCard('scene', period, event, scene)"
+            >Add Scene</button>
+          </li>
           <li *ngFor="let scene of event.scenes" class="scene" [ngClass]="{ 'scene-light': scene.light, 'scene-dark': !scene.light }">
             <span class="scene-title">{{ scene.title }}</span>
             <span class="scene-answer">{{ scene.answer }}</span>
             <button
             class="button-add scene-add"
-            *ngIf="gameState === GameState.AddPeriodEventScene"
+            *ngIf="isInAddPeriodEventSceneMode()"
             (click)="addCard('scene', period, event, scene)"
             >Add Scene</button>
           </li>
@@ -53,12 +75,26 @@
   </li>
 </ul>
 
-<form (ngSubmit)="onSubmitFocus()" *ngIf="gameState === GameState.DeclareFocus">
+<ul>
+  <li *ngFor="let legacy of table.legacies">
+    <span class="legacy-name">{{ legacy.title }}</span>
+    <span class="legacy-lens">{{ legacy.lens.name }}</span>
+  </li>
+</ul>
+
+<form (ngSubmit)="onSubmit()" *ngIf="gameState === GameState.DeclareFocus">
   <input [(ngModel)]="textbox" name="textbox" placeholder="Focus">
   <input type="submit">
 </form>
-<form (ngSubmit)="onSubmitPeriodEventScene()" *ngIf="gameState === GameState.SubmitPeriodEventScene">
+<form (ngSubmit)="onSubmit()" *ngIf="gameState === GameState.SubmitPeriodEventScene">
   <input [(ngModel)]="textbox" name="textbox" placeholder="Period">
 </form>
+<form (ngSubmit)="onSubmit()" *ngIf="gameState === GameState.ChooseLegacy">
+  <input [(ngModel)]="textbox" name="textbox" placeholder="Legacy">
+  <input type="submit">
+</form>
+<form (ngSubmit)="onSubmit()" *ngIf="gameState === GameState.Talk">
+  <input type="submit">
+</form>
 
-<button (click)="triggerNext()">Next Step</button>
+<button (click)="onSubmit(true)">Next Step</button>
