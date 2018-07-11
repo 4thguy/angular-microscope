@@ -1,27 +1,17 @@
 # AngularMicroscope
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+## What is this?
 
-## Development server
+If you look at the [MicroscopeRPG subreddit](http://www.reddit.com/r/MicroscopeRPG), one of the most common questions is a variation on how Microscope can be played online. There are many suggestions on how one might go about this, and they are all great. This is me tossing something else in the hat.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Microscope is a great game none the suggestions can actually guide you through the the process of setting up and running the game. This project focuses on taking the rules from the game and guiding you through the process.
 
-## Code scaffolding
+This project is mainly an excuse for me to implement a project in Angular so that I'd have something to show for it. This my first Angular (not AngularJS) project, so the implementation itself might be a bit rough in some cases.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## How playable is this?
 
-## Build
+Almost! You can set the game up and go through the rounds but you cannot add any actual Period, Event, or Scene cards yet. I've arrived at a point where I want to stop and start working on the interface before I try to code up some inputs.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## This is ugly!
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Yup, it sure is. My first priority was to set up the game loop so that I'd have a simpler way of going through the game screens. Now that that part is done I'll start refractoring and, yes, making the game look prettier.
