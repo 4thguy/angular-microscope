@@ -1,6 +1,11 @@
 import { GameState } from './game.state';
 
 export class GameStateTrigger {
+
+  static triggerNewRound(gameState:GameState): GameState {
+    return GameState.SelectLens;
+  }
+
   static triggerNext(gameState: GameState): GameState {
     switch (gameState) {
       case GameState.Start:

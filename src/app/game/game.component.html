@@ -1,8 +1,8 @@
 <div class="bigpicture-title" *ngIf="table.bigPicture">{{ table.bigPicture }}</div>
 <div class="state-title">{{ currentStateString() }}</div>
-<div class="player-name" *ngIf="currentLens">Current Lens: {{ currentLens.name }}</div>
-<div class="player-name" *ngIf="( isInLegacyMode() && previousLens)">Legacy Player: {{ previousLens.name }}</div>
-<div class="player-name" *ngIf="(!isInLegacyMode() && currentPlayer)">Current Player: {{ currentPlayer.name }}</div>
+<div class="player-name" *ngIf="canShowLens()">Current Lens: {{ currentLens.name }}</div>
+<div class="player-name" *ngIf="canShowLegacyPlayer()">Legacy Player: {{ previousLens.name }}</div>
+<div class="player-name" *ngIf="canShowCurrentPlayer()">Current Player: {{ currentPlayer.name }}</div>
 
 <ul>
   <li *ngFor="let focus of table.focai.focai">
@@ -34,14 +34,14 @@
     <span class="period-title">{{ period.title }}</span>
     <button
     class="button-add period-add"
-    *ngIf="isInAddPeriodEventSceneMode()"
+    *ngIf="canShowAddPeriodEventSceneButton()"
     (click)="addCard('period', period)"
     >Add Period</button>
     <ul>
-      <li *ngIf="isInAddPeriodEventSceneMode()">
+      <li *ngIf="canShowAddPeriodEventSceneButton()">
         <button
         class="button-add event-add"
-        *ngIf="isInAddPeriodEventSceneMode()"
+        *ngIf="canShowAddPeriodEventSceneButton()"
         (click)="addCard('event', period, event)"
         >Add Event</button>
       </li>
@@ -49,14 +49,14 @@
         <span class="event-title">{{ event.title }}</span>
         <button
         class="button-add event-add"
-        *ngIf="isInAddPeriodEventSceneMode()"
+        *ngIf="canShowAddPeriodEventSceneButton()"
         (click)="addCard('event', period, event)"
         >Add Event</button>
         <ul>
-          <li *ngIf="isInAddPeriodEventSceneMode()">
+          <li *ngIf="canShowAddPeriodEventSceneButton()">
             <button
             class="button-add scene-add"
-            *ngIf="isInAddPeriodEventSceneMode()"
+            *ngIf="canShowAddPeriodEventSceneButton()"
             (click)="addCard('scene', period, event, scene)"
             >Add Scene</button>
           </li>
@@ -65,7 +65,7 @@
             <span class="scene-answer">{{ scene.answer }}</span>
             <button
             class="button-add scene-add"
-            *ngIf="isInAddPeriodEventSceneMode()"
+            *ngIf="canShowAddPeriodEventSceneButton()"
             (click)="addCard('scene', period, event, scene)"
             >Add Scene</button>
           </li>
@@ -82,19 +82,60 @@
   </li>
 </ul>
 
+<form (ngSubmit)="onSubmit(true)" *ngIf="gameState === GameState.Start">
+  <input type="submit" value="Start">
+</form>
+<form (ngSubmit)="onSubmit(true)" *ngIf="gameState === GameState.SelectLens">
+  <input type="submit" value="Select Lens">
+</form>
 <form (ngSubmit)="onSubmit()" *ngIf="gameState === GameState.DeclareFocus">
   <input [(ngModel)]="textbox" name="textbox" placeholder="Focus">
-  <input type="submit">
+  <input type="submit" value="Set Focus">
+</form>
+<form (ngSubmit)="onSubmit(true)" *ngIf="gameState === GameState.AddPeriodEventScene">
+  <!-- <input type="submit" value="Skip"> -->
 </form>
 <form (ngSubmit)="onSubmit()" *ngIf="gameState === GameState.SubmitPeriodEventScene">
-  <input [(ngModel)]="textbox" name="textbox" placeholder="Period">
+  <div class="period">
+    <input [(ngModel)]="textbox" name="textbox" placeholder="Period">
+  </div>
+  <div class="event">
+    <input [(ngModel)]="textbox" name="textbox" placeholder="Event">
+  </div>
+  <div class="scene">
+    <input [(ngModel)]="textbox" name="textbox" placeholder="Scene Question">
+    <input [(ngModel)]="textbox2" name="textbox" placeholder="Scene Answer">
+  </div>
+  <input type="submit" value="Add">
 </form>
 <form (ngSubmit)="onSubmit()" *ngIf="gameState === GameState.ChooseLegacy">
   <input [(ngModel)]="textbox" name="textbox" placeholder="Legacy">
   <input type="submit">
 </form>
-<form (ngSubmit)="onSubmit()" *ngIf="gameState === GameState.Talk">
-  <input type="submit">
+<form (ngSubmit)="onSubmit(true)" *ngIf="gameState === GameState.ExploreLegacy">
+  <!-- <input type="submit" value="Skip"> -->
 </form>
-
-<button (click)="onSubmit(true)">Next Step</button>
+<form (ngSubmit)="onSubmit()" *ngIf="gameState === GameState.SubmitLegacy">
+  <div class="period">
+    <input [(ngModel)]="textbox" name="textbox" placeholder="Period">
+  </div>
+  <div class="event">
+    <input [(ngModel)]="textbox" name="textbox" placeholder="Event">
+  </div>
+  <div class="scene">
+    <input [(ngModel)]="textbox" name="textbox" placeholder="Scene Question">
+    <input [(ngModel)]="textbox2" name="textbox" placeholder="Scene Answer">
+  </div>
+  <input type="submit" value="Add Legacy">
+</form>
+<div *ngIf="gameState === GameState.Talk">
+  <form (ngSubmit)="onSubmit()">
+    <input type="submit" value="Next Round">
+  </form>
+  <form (ngSubmit)="onSubmit(true)" *ngIf="canFinishGame()">
+    <input type="submit" value="Finish Game">
+  </form>
+</div>
+<form (ngSubmit)="onSubmit()" *ngIf="gameState === GameState.Finish">
+  <input type="submit" value="Next Round">
+</form>

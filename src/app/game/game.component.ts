@@ -53,6 +53,36 @@ export class GameComponent implements OnInit {
   }
   isInAddPeriodEventSceneMode(): boolean {
     return (
+      this.gameState === GameState.AddPeriodEventScene
+    );
+  }
+  canFinishGame(): boolean {
+    return (
+      this.gameState === GameState.Talk &&
+      this.roundNumber === this.table.players.length
+    );
+  }
+  canShowLens(): boolean {
+    return (
+      this.gameState ===  GameState.DeclareFocus ||
+      this.gameState ===  GameState.AddPeriodEventScene ||
+      this.gameState ===  GameState.SubmitPeriodEventScene
+    );
+  }
+  canShowCurrentPlayer(): boolean {
+    return (
+      this.isInAddPeriodEventSceneMode() &&
+      this.currentPlayer !== undefined
+    );
+  }
+  canShowLegacyPlayer(): boolean {
+    return (
+      this.isInLegacyMode() &&
+      this.previousLens !== undefined
+    );
+  }
+  canShowAddPeriodEventSceneButton(): boolean {
+    return (
       this.gameState === GameState.AddPeriodEventScene ||
       this.gameState === GameState.ExploreLegacy
     );
@@ -133,22 +163,12 @@ export class GameComponent implements OnInit {
     this.roundIterator++;
   }
 
-  canSubmitNextStep(): boolean {
-    switch (this.gameState) {
-      case GameState.Start:
-      case GameState.Talk:
-        return true;
-
-      default:
-        return false;
-    }
-  }
   onSubmit(next:boolean): void {
     if (next) {
       switch (this.gameState) {
-        case GameState.Start:
+        case GameState.SelectLens:
           this.nextLens();
-          this.nextPlayer();
+          this.currentPlayer = this.currentLens;
           break;
       }
       this.triggerNext();
@@ -184,7 +204,8 @@ export class GameComponent implements OnInit {
          case GameState.SubmitLegacy:
           break;
         case GameState.Talk:
-          this.gameState = GameState.DeclareFocus;
+          this.triggerNewRound();
+          break;
         case GameState.Finish:
           break;
 
@@ -199,6 +220,9 @@ export class GameComponent implements OnInit {
     return GameStateTrigger.currentStateString(this.gameState);
   }
 
+  triggerNewRound(): void {
+    this.gameState = GameStateTrigger.triggerNewRound(this.gameState);
+  }
   triggerRollback(): void {
     this.gameState = GameStateTrigger.triggerRollback(this.gameState);
   }
