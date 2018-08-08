@@ -38,37 +38,21 @@
     (click)="addCard('period', period)"
     >Add Period</button>
     <ul>
-      <li *ngIf="canShowAddPeriodEventSceneButton()">
-        <button
-        class="button-add event-add"
-        *ngIf="canShowAddPeriodEventSceneButton()"
-        (click)="addCard('event', period, event)"
-        >Add Event</button>
+      <li>
+        <app-card-event-button
+          [event]="event"
+          [canShowAddButton]="canShowAddButton"
+        ></app-card-event-button>
       </li>
       <li *ngFor="let event of period.events" class="event" [ngClass]="{ 'event-light': event.light, 'event-dark': !event.light }">
-        <span class="event-title">{{ event.title }}</span>
-        <button
-        class="button-add event-add"
-        *ngIf="canShowAddPeriodEventSceneButton()"
-        (click)="addCard('event', period, event)"
-        >Add Event</button>
-        <ul>
-          <li>
-            <app-card-scene-button
-              [scene]="scene"
-              [canShowAddSceneButton]="canShowAddPeriodEventSceneButton()"
-            ></app-card-scene-button>
-          </li>
-          <li *ngFor="let scene of event.scenes">
-            <app-card-scene
-              [scene]="scene"
-            ></app-card-scene>
-            <app-card-scene-button
-              [scene]="scene"
-              [canShowAddSceneButton]="canShowAddPeriodEventSceneButton()"
-            ></app-card-scene-button>
-          </li>
-        </ul>
+        <app-card-event
+          [event]="event"
+          [canShowAddButton]="canShowAddPeriodEventSceneButton()"
+        ></app-card-event>
+        <app-card-event-button
+          [event]="event"
+          [canShowAddButton]="canShowAddButton"
+        ></app-card-event-button>
       </li>
     </ul>
   </li>

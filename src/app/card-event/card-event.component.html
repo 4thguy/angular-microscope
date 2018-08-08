@@ -1,0 +1,25 @@
+<div class="card card-event" [ngClass]="{ 'card-light': event.light, 'card-dark': !event.light }">
+  <mat-card>
+    <mat-card-header>
+      <div mat-card-avatar></div>
+      <mat-card-title>{{ event.title }}</mat-card-title>
+    </mat-card-header>
+  </mat-card>
+</div>
+<ul class="card-list">
+  <li>
+    <app-card-scene-button
+      [scene]="scene"
+      [canShowAddButton]="canShowAddButton"
+    ></app-card-scene-button>
+  </li>
+  <li *ngFor="let scene of event.scenes">
+    <app-card-scene
+      [scene]="scene"
+    ></app-card-scene>
+    <app-card-scene-button
+      [scene]="scene"
+      [canShowAddButton]="canShowAddButton"
+    ></app-card-scene-button>
+  </li>
+</ul>

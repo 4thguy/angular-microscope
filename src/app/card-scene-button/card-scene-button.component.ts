@@ -9,7 +9,7 @@ import { CardScene } from '../cardScene';
 })
 export class CardSceneButtonComponent implements OnInit {
   @Input() scene: CardScene;
-  @Input() canShowAddSceneButton: boolean;
+  @Input() canShowAddButton: boolean;
 
   constructor() { }
 

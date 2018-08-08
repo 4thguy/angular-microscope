@@ -11,6 +11,8 @@ import { SetupComponent } from './setup/setup.component';
 import { GameComponent } from './game/game.component';
 import { CardSceneComponent } from './card-scene/card-scene.component';
 import { CardSceneButtonComponent } from './card-scene-button/card-scene-button.component';
+import { CardEventComponent } from './card-event/card-event.component';
+import { CardEventButtonComponent } from './card-event-button/card-event-button.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { CardSceneButtonComponent } from './card-scene-button/card-scene-button.
     SetupComponent,
     GameComponent,
     CardSceneComponent,
-    CardSceneButtonComponent
+    CardSceneButtonComponent,
+    CardEventComponent,
+    CardEventButtonComponent
   ],
   imports: [
     BrowserModule,
