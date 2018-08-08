@@ -2,6 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { CardModule } from './modules/card.module';
+
 import { AppComponent } from './app.component';
 import { SetupComponent } from './setup/setup.component';
 import { GameComponent } from './game/game.component';
@@ -14,7 +18,8 @@ import { GameComponent } from './game/game.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
