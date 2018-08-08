@@ -12,3 +12,10 @@
 .period:last-child > .period-add {
   display: none;
 }
+
+app-card-scene,
+app-card-scene-button {
+  display: block;
+  width: 100%;
+  max-width: 344px;
+}

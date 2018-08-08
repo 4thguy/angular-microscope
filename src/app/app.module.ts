@@ -9,17 +9,22 @@ import { CardModule } from './modules/card.module';
 import { AppComponent } from './app.component';
 import { SetupComponent } from './setup/setup.component';
 import { GameComponent } from './game/game.component';
+import { CardSceneComponent } from './card-scene/card-scene.component';
+import { CardSceneButtonComponent } from './card-scene-button/card-scene-button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SetupComponent,
-    GameComponent
+    GameComponent,
+    CardSceneComponent,
+    CardSceneButtonComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
+    CardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
