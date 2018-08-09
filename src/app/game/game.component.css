@@ -13,9 +13,14 @@
   display: none;
 }
 
-app-card-scene,
-app-card-scene-button {
-  display: block;
-  width: 100%;
-  max-width: 344px;
+.card-period-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.card-period-list li {
+  flex: none;
+}
+.card-period-list li:not(:last-child) {
+  margin-right: 15px;
 }

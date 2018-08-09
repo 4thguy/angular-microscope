@@ -29,32 +29,12 @@
   </li>
 </ul>
 
-<ul>
+<ul class="card-list card-period-list">
   <li *ngFor="let period of table.periods" class="period" [ngClass]="{ 'period-light': period.light, 'period-dark': !period.light }">
-    <span class="period-title">{{ period.title }}</span>
-    <button
-    class="button-add period-add"
-    *ngIf="canShowAddPeriodEventSceneButton()"
-    (click)="addCard('period', period)"
-    >Add Period</button>
-    <ul>
-      <li>
-        <app-card-event-button
-          [event]="event"
-          [canShowAddButton]="canShowAddButton"
-        ></app-card-event-button>
-      </li>
-      <li *ngFor="let event of period.events" class="event" [ngClass]="{ 'event-light': event.light, 'event-dark': !event.light }">
-        <app-card-event
-          [event]="event"
-          [canShowAddButton]="canShowAddPeriodEventSceneButton()"
-        ></app-card-event>
-        <app-card-event-button
-          [event]="event"
-          [canShowAddButton]="canShowAddButton"
-        ></app-card-event-button>
-      </li>
-    </ul>
+    <app-card-period
+      [period]="period"
+      [canShowAddButton]="canShowAddPeriodEventSceneButton()"
+    ></app-card-period>
   </li>
 </ul>
 

@@ -4,12 +4,20 @@
 
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
-.card,
-app-card-event-button,
-app-card-scene-button {
+.card {
   display: block;
   width: 100%;
   max-width: 344px;
+}
+
+.card .mat-card .mat-card-header {
+  display: flex;
+  flex-direction: row;
+  flex: none;
+  align-items: center;
+}
+.card .mat-card .mat-card-header .mat-card-header-text .mat-card-title {
+  margin-bottom: 0;
 }
 
 .card-light .mat-card-avatar {

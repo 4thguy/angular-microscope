@@ -13,6 +13,7 @@ import { CardSceneComponent } from './card-scene/card-scene.component';
 import { CardSceneButtonComponent } from './card-scene-button/card-scene-button.component';
 import { CardEventComponent } from './card-event/card-event.component';
 import { CardEventButtonComponent } from './card-event-button/card-event-button.component';
+import { CardPeriodComponent } from './card-period/card-period.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CardEventButtonComponent } from './card-event-button/card-event-button.
     CardSceneComponent,
     CardSceneButtonComponent,
     CardEventComponent,
-    CardEventButtonComponent
+    CardEventButtonComponent,
+    CardPeriodComponent,
   ],
   imports: [
     BrowserModule,

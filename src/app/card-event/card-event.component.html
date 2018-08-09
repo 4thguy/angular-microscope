@@ -6,20 +6,10 @@
     </mat-card-header>
   </mat-card>
 </div>
-<ul class="card-list">
-  <li>
-    <app-card-scene-button
-      [scene]="scene"
-      [canShowAddButton]="canShowAddButton"
-    ></app-card-scene-button>
-  </li>
+<ul class="card-list card-scene-list">
   <li *ngFor="let scene of event.scenes">
     <app-card-scene
       [scene]="scene"
     ></app-card-scene>
-    <app-card-scene-button
-      [scene]="scene"
-      [canShowAddButton]="canShowAddButton"
-    ></app-card-scene-button>
   </li>
 </ul>
