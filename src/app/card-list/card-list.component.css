@@ -1,0 +1,9 @@
+.card-list > .mat-card:first-child {
+  color: black;
+  background: #FFF9C4;
+  border-radius: 2px 2px 0 0;
+}
+.card-list > .mat-card:last-child {
+  border-radius: 0 0 2px 2px;
+  margin-bottom: 15px;
+}

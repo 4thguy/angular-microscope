@@ -13,14 +13,47 @@
   display: none;
 }
 
-.card-period-list {
+.card-list-left,
+.card-list-right {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 }
-.card-period-list li {
+.card-list-left {
+  flex-direction: flex-start;
+}
+.card-list-right {
+  flex-direction: flex-end;
+}
+.card-list-left > li:not(:last-child),
+.card-list-right > li:not(:last-child) {
+  margin-right: 15px;
+}
+
+.card-meta-list,
+.card-period-list,
+.card-legacy-list {
+  display: flex;
+  flex-direction: row;
+}
+.card-meta-list > li,
+.card-period-list > li
+.card-legacy-list > li {
   flex: none;
 }
-.card-period-list li:not(:last-child) {
+.card-meta-list > li:not(:last-child),
+.card-period-list > li:not(:last-child),
+.card-legacy-list > li:not(:last-child) {
   margin-right: 15px;
+}
+
+.card-meta-list {
+  justify-content: space-between;
+}
+.card-meta-list > li:first-child {
+  justify-self: flex-start;
+}
+
+.card-period-list,
+.card-legacy-list {
+  justify-content: space-between;
 }
