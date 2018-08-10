@@ -1,0 +1,52 @@
+.setup-process {
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.setup-process > .mat-card > .mat-card-actions {
+  text-align: right;
+}
+
+.setup-process > .card-bookend-history .card-period,
+.setup-process > .card-palette .card-palette {
+  width: auto;
+}
+.setup-process > .card-bookend-history .card-period .mat-card-content {
+  text-align: right;
+}
+
+.card-period.mat-card {
+  color: #fff;
+  background: #FBC02D;
+  margin-bottom: 15px;
+}
+.card-period.mat-card.light {
+  background: #FB002D;
+}
+
+.card-palette-players,
+.card-palette-yes,
+.card-palette-no {
+  color: #fff;
+  background: #FBC02D;
+}
+.card-palette-players:not(:last-child),
+.card-palette-yes:not(:last-child),
+.card-palette-no:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.input-field-with-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-form-field.full-width {
+  width: 100%;
+}

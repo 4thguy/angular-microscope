@@ -29,8 +29,59 @@ export class SetupComponent implements OnInit {
   ngOnInit() {
     this.data = new SetupData();
     this.table = CardTable.getSingleton();
-    this.setupState = SetupState.Players;
-    this.setupState = SetupState.Finished;
+    this.setupState = SetupState.Welcome;
+  }
+
+  nextStep() {
+    if (this.canProceed()) {
+      switch (this.setupState) {
+        case SetupState.Welcome:
+          this.setupState = SetupState.Players;
+          break;
+        case SetupState.Players:
+          this.setupState = SetupState.BigPicture;
+          break;
+        case SetupState.BigPicture:
+          this.table.title = this.data.bigPicture;
+          this.setupState = SetupState.BookendHistory;
+          break;
+        case SetupState.BookendHistory:
+          this.onSubmitBookends();
+          break;
+        case SetupState.Palette:
+          this.setupState = SetupState.Finished;
+          break;
+        default:
+          // code...
+          break;
+      }
+    }
+  }
+  canProceed() {
+    switch (this.setupState) {
+      case SetupState.Welcome:
+        return true;
+      case SetupState.Players:
+        return (this.table.players.length > 0);
+      case SetupState.BigPicture:
+        return (this.data.bigPicture.length > 0);
+      case SetupState.BookendHistory:
+        return (
+          (this.data.bookends.start.title.length > 0) &&
+          (this.data.bookends.end.title.length > 0)
+        );
+      case SetupState.Palette:
+        return (
+          ((this.table.palette.yes.length) + (this.table.palette.no.length)) %
+          (this.table.players.length)
+        ) === 0;
+      default:
+        return false;
+        break;
+    }
+  }
+  canNotProceed() {
+    return !this.canProceed();
   }
 
   onSubmitPlayer() {
@@ -40,17 +91,6 @@ export class SetupComponent implements OnInit {
   }
   onDeletePlayer(player: Player) {
     this.table.removePlayer(player);
-  }
-  onSubmitPlayers() {
-    if (this.table.players.length>0) {
-      this.setupState = SetupState.BigPicture;
-    }
-  }
-
-  onSubmitBigPicture() {
-      this.table.title = this.data.bigPicture;
-
-      this.setupState = SetupState.BookendHistory
   }
 
   onSubmitBookends() {
@@ -82,13 +122,6 @@ export class SetupComponent implements OnInit {
     this.data.palette.lastRound = true;
     this.paletteNextPlayer();
     this.onSubmitPaletteAfter();
-  }
-
-  onSubmitPaletteEnd() {
-    var i = this.table.players.indexOf(this.data.palette.currentPlayer);
-    if ((i === 0) || (i === this.table.players.length - 1)) {
-      this.setupState = SetupState.Rounds;
-    }
   }
 
   onSubmitPaletteAfter() {

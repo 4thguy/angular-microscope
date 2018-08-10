@@ -1,8 +1,8 @@
 import { Player } from '../player';
 
 export class SetupData {
-  nextName: string;
-  bigPicture: string;
+  nextName: string = '';
+  bigPicture: string = '';
   bookends: Object;
   palette: Object;
 

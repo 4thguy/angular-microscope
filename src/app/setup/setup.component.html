@@ -1,54 +1,153 @@
-<form *ngIf="setupState === SetupState.Players">
-  <ul>
-    <li *ngFor="let player of table.players">
-      <span class="player-name">{{ player.name }}</span>
-      <span class="player-delete" (click)="onDeletePlayer(player)">X</span>
-    </li>
-  </ul>
-  <input [(ngModel)]="data.nextName" name="nextName" placeholder="Player {{ table.players.length + 1 }}">
-  <button (click)="onSubmitPlayer()">Add Player</button>
-  <button (click)="onSubmitPlayers()">Add Players</button>
-</form>
-<form (ngSubmit)="onSubmitBigPicture()" *ngIf="setupState === SetupState.BigPicture">
-  <input [(ngModel)]="data.bigPicture" name="bigPicture" placeholder="Big Picture">
-  <input type="submit">
-</form>
-<form (ngSubmit)="onSubmitBookends()" *ngIf="setupState === SetupState.BookendHistory">
-  <div class="bookend-start" [ngClass]="{ 'period-light': data.bookends.start.light }">
-    <input [(ngModel)]="data.bookends.start.title" name="title" placeholder="Start">
-    <input [(ngModel)]="data.bookends.start.light" name="light" type="checkbox">
-  </div>
-  <div class="bookend-end" [ngClass]="{ 'period-light': data.bookends.end.light }">
-    <input [(ngModel)]="data.bookends.end.title" name="title" placeholder="End">
-    <input [(ngModel)]="data.bookends.end.light" name="light" type="checkbox">
-  </div>
-  <input type="submit">
-</form>
-<form *ngIf="setupState === SetupState.Palette">
-  Current Player: {{ data.palette.currentPlayer.name }}
-  <ul>
-    <li>
-      <span class="palette-title">Yes</span>
-      <ul>
-        <li *ngFor="let yes of table.palette.yes">
-          <span class="palette-title">{{ yes }}</span>
-          <span class="palette-delete">X</span>
-        </li>
-      </ul>
-      <input [(ngModel)]="data.palette.yes" name="yes">
-      <button (click)="onSubmitPalette('yes')">Add Yes</button>
-      <li>
-        <span class="palette-title">No</span>
-        <ul>
-          <li *ngFor="let no of table.palette.no">
-            <span class="palette-title">{{ no }}</span>
-            <span class="palette-delete">X</span>
-          </li>
-        </ul>
-        <input [(ngModel)]="data.palette.no" name="no">
-        <button (click)="onSubmitPalette('no')">Add No</button>
-      </li>
-    </ul>
-    <button (click)="onSubmitPaletteSkip()">Skip Me</button>
-    <button (click)="onSubmitPaletteEnd()">End</button>
-  </form>
+<div class="setup-process">
+
+  <mat-card class="card card-welcome" *ngIf="setupState === SetupState.Welcome">
+    <mat-card-header>
+      <mat-card-title>Angular Microscope</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="assets/images/logo.png">
+    <mat-card-content>
+      <p>
+        Welcome! This setup process is designed to help you set up and start playing a game of Microscope in no time
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="nextStep()" [disabled]="canNotProceed()">NEXT</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card class="card card-players" *ngIf="setupState === SetupState.Players">
+    <mat-card-header>
+      <mat-card-title>Add Players</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item *ngFor="let player of table.players">
+           <span>{{ player.name }}</span>
+           <button mat-icon-button color="warn" (click)="onDeletePlayer(player)">
+              <mat-icon>delete</mat-icon>
+           </button>
+        </mat-list-item>
+      </mat-list>
+      <div class="input-field-with-button">
+        <mat-form-field>
+          <input matInput type="text" [(ngModel)]="data.nextName" placeholder="Player {{ table.players.length + 1 }}">
+        </mat-form-field>
+        <button mat-button (click)="onSubmitPlayer()" [disabled]="!data.nextName.length">Add Player</button>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="nextStep()" [disabled]="canNotProceed()">NEXT</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card class="card card-big-picture" *ngIf="setupState === SetupState.BigPicture">
+    <mat-card-header>
+      <mat-card-title>Big Picture</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class="full-width">
+        <input matInput type="text" [(ngModel)]="data.bigPicture">
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="nextStep()" [disabled]="canNotProceed()">NEXT</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card class="card card-bookend-history" *ngIf="setupState === SetupState.BookendHistory">
+    <mat-card-header>
+      <mat-card-title>Bookend History</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+      <mat-card class="card card-period" [ngClass]="{ 'light': data.bookends.start.light }">
+        <mat-card-header>
+          <mat-form-field class="full-width">
+            <input matInput type="text" [(ngModel)]="data.bookends.start.title" name="title" placeholder="Start">
+          </mat-form-field>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-checkbox [(ngModel)]="data.bookends.start.light">Light</mat-checkbox>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="card card-period" [ngClass]="{ 'light': data.bookends.end.light }">
+        <mat-card-header>
+          <mat-form-field class="full-width">
+            <input matInput type="text" [(ngModel)]="data.bookends.end.title" name="title" placeholder="End">
+          </mat-form-field>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-checkbox [(ngModel)]="data.bookends.end.light">Light</mat-checkbox>
+        </mat-card-content>
+      </mat-card>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="nextStep()" [disabled]="canNotProceed()">NEXT</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card class="card card-palette" *ngIf="setupState === SetupState.Palette">
+    <mat-card-header>
+      <mat-card-title>Palette</mat-card-title>
+      <mat-card-subtitle>Add or Ban Ingredients</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+
+      <mat-card class="card card-palette card-palette-players">
+        <mat-card-content>
+          <div class="input-field-with-button">
+            <span>
+              <span>Current Player - {{ this.data.palette.currentPlayer.name }}</span>
+              <span *ngIf="this.data.palette.lastRound">&nbsp;(LAST ROUND)</span>
+            </span>
+            <button mat-button (click)="onSubmitPaletteSkip()">SKIP</button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="card card-palette card-palette-yes">
+        <mat-card-header>
+          <mat-card-title>Palette - Yes</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item *ngFor="let yes of table.palette.yes">
+               <span>{{ yes }}</span>
+            </mat-list-item>
+          </mat-list>
+          <div class="input-field-with-button">
+            <mat-form-field>
+              <input matInput type="text" [(ngModel)]="data.palette.yes" name="yes">
+            </mat-form-field>
+            <button mat-button (click)="onSubmitPalette('yes')" [disabled]="!data.palette.yes">ADD</button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="card card-palette card-palette-no">
+        <mat-card-header>
+          <mat-card-title>Palette - No</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item *ngFor="let no of table.palette.no">
+               <span>{{ no }}</span>
+            </mat-list-item>
+          </mat-list>
+          <div class="input-field-with-button">
+            <mat-form-field>
+              <input matInput type="text" [(ngModel)]="data.palette.no" name="no">
+            </mat-form-field>
+            <button mat-button (click)="onSubmitPalette('no')" [disabled]="!data.palette.no">ADD</button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="nextStep()" [disabled]="canNotProceed()">NEXT</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
