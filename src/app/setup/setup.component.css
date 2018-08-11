@@ -22,7 +22,7 @@
 .card-period.mat-card {
   color: #fff;
   background: #FBC02D;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 .card-period.mat-card.light {
   background: #FB002D;
@@ -34,11 +34,6 @@
   color: #fff;
   background: #FBC02D;
 }
-.card-palette-players:not(:last-child),
-.card-palette-yes:not(:last-child),
-.card-palette-no:not(:last-child) {
-  margin-bottom: 15px;
-}
 
 .input-field-with-button {
   display: flex;
@@ -49,4 +44,65 @@
 
 .mat-form-field.full-width {
   width: 100%;
+}
+
+.show-portrait,
+.show-landscape {
+  display: none;
+}
+
+@media (orientation: portrait) {
+  .show-portrait {
+    display: block;
+  }
+
+  .setup-process > .card.card-palette > .mat-card-content > .card.card-palette-players,
+  .setup-process > .card.card-palette > .mat-card-content   .card.card-palette-yes {
+    margin-bottom: 16px;
+  }
+}
+
+@media (orientation: landscape) {
+  .show-landscape {
+    display: block;
+  }
+
+  .setup-process > .card {
+    max-width: 736px;
+  }
+  .setup-process > .card > .mat-card-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .setup-process > .card > .mat-card-content > * {
+    width: 100%;
+    margin-bottom: 0;
+  }
+  .setup-process > .card > .mat-card-content > *:not(:last-child) {
+    margin-right: 16px;
+  }
+
+  .setup-process > .card.card-palette > .mat-card-content {
+    flex-direction: column;
+  }
+  .setup-process > .card.card-palette > .mat-card-content > .card.card-palette-players {
+    margin-right: 0;
+    margin-bottom: 16px;
+    max-width: calc(100% - 48px);
+  }
+  .setup-process > .card.card-palette > .mat-card-content > .container-palette-yes-no {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .setup-process > .card.card-palette > .mat-card-content > .container-palette-yes-no > * {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .setup-process > .card.card-palette > .mat-card-content > .container-palette-yes-no > *:not(:last-child) {
+    margin-right: 16px;
+  }
+
 }

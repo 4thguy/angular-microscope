@@ -4,11 +4,17 @@
     <mat-card-header>
       <mat-card-title>Angular Microscope</mat-card-title>
     </mat-card-header>
-    <img mat-card-image src="assets/images/logo.png">
+    <img mat-card-image class="show-portrait" src="assets/images/logo.png">
     <mat-card-content>
-      <p>
-        Welcome! This setup process is designed to help you set up and start playing a game of Microscope in no time
-      </p>
+      <img class="show-landscape" src="assets/images/logo.png">
+      <div>
+        <p>
+          Welcome! This setup process is designed to help you set up and start playing a game of Microscope in no time.
+        </p>
+        <p>
+          If you have any questions, or comments, or experience any issues, please feel free to drop me a note here.
+        </p>
+      </div>
     </mat-card-content>
     <mat-card-actions>
       <button mat-button (click)="nextStep()" [disabled]="canNotProceed()">NEXT</button>
@@ -67,7 +73,7 @@
           </mat-form-field>
         </mat-card-header>
         <mat-card-content>
-          <mat-checkbox [(ngModel)]="data.bookends.start.light">Light</mat-checkbox>
+          <mat-slide-toggle [(ngModel)]="data.bookends.start.light">Light</mat-slide-toggle>
         </mat-card-content>
       </mat-card>
 
@@ -78,7 +84,7 @@
           </mat-form-field>
         </mat-card-header>
         <mat-card-content>
-          <mat-checkbox [(ngModel)]="data.bookends.end.light">Light</mat-checkbox>
+          <mat-slide-toggle [(ngModel)]="data.bookends.end.light">Light</mat-slide-toggle>
         </mat-card-content>
       </mat-card>
 
@@ -95,7 +101,7 @@
     </mat-card-header>
     <mat-card-content>
 
-      <mat-card class="card card-palette card-palette-players">
+      <mat-card class="card card-palette-players">
         <mat-card-content>
           <div class="input-field-with-button">
             <span>
@@ -107,44 +113,47 @@
         </mat-card-content>
       </mat-card>
 
-      <mat-card class="card card-palette card-palette-yes">
-        <mat-card-header>
-          <mat-card-title>Palette - Yes</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <mat-list>
-            <mat-list-item *ngFor="let yes of table.palette.yes">
-               <span>{{ yes }}</span>
-            </mat-list-item>
-          </mat-list>
-          <div class="input-field-with-button">
-            <mat-form-field>
-              <input matInput type="text" [(ngModel)]="data.palette.yes" name="yes">
-            </mat-form-field>
-            <button mat-button (click)="onSubmitPalette('yes')" [disabled]="!data.palette.yes">ADD</button>
-          </div>
-        </mat-card-content>
-      </mat-card>
+      <div class="container-palette-yes-no">
 
-      <mat-card class="card card-palette card-palette-no">
-        <mat-card-header>
-          <mat-card-title>Palette - No</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <mat-list>
-            <mat-list-item *ngFor="let no of table.palette.no">
-               <span>{{ no }}</span>
-            </mat-list-item>
-          </mat-list>
-          <div class="input-field-with-button">
-            <mat-form-field>
-              <input matInput type="text" [(ngModel)]="data.palette.no" name="no">
-            </mat-form-field>
-            <button mat-button (click)="onSubmitPalette('no')" [disabled]="!data.palette.no">ADD</button>
-          </div>
-        </mat-card-content>
-      </mat-card>
+        <mat-card class="card card-palette-yes">
+          <mat-card-header>
+            <mat-card-title>Palette - Yes</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-list>
+              <mat-list-item *ngFor="let yes of table.palette.yes">
+                 <span>{{ yes }}</span>
+              </mat-list-item>
+            </mat-list>
+            <div class="input-field-with-button">
+              <mat-form-field>
+                <input matInput type="text" [(ngModel)]="data.palette.yes" name="yes">
+              </mat-form-field>
+              <button mat-button (click)="onSubmitPalette('yes')" [disabled]="!data.palette.yes">ADD</button>
+            </div>
+          </mat-card-content>
+        </mat-card>
 
+        <mat-card class="card card-palette-no">
+          <mat-card-header>
+            <mat-card-title>Palette - No</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-list>
+              <mat-list-item *ngFor="let no of table.palette.no">
+                 <span>{{ no }}</span>
+              </mat-list-item>
+            </mat-list>
+            <div class="input-field-with-button">
+              <mat-form-field>
+                <input matInput type="text" [(ngModel)]="data.palette.no" name="no">
+              </mat-form-field>
+              <button mat-button (click)="onSubmitPalette('no')" [disabled]="!data.palette.no">ADD</button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+      </div>
     </mat-card-content>
     <mat-card-actions>
       <button mat-button (click)="nextStep()" [disabled]="canNotProceed()">NEXT</button>
